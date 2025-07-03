@@ -9,4 +9,7 @@ clap = { version = "4", features = ["derive"] }
 rand = "0.9.1"
 GSL = "7.0.0"
 ndarray = "0.16.1"
-ndarray-linalg = {version = "0.17.0", features = ["openblas-static"] }
+ndarray-linalg = {version = "0.17.0", features = ["openblas-system"] }
+
+[profile.release]
+debug = true
