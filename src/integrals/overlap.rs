@@ -1,10 +1,10 @@
 use crate::classes::molecule::Molecule;
-use nalgebra::DMatrix;
+use ndarray::Array2;
 use std::f64::consts::PI;
 
-pub fn overlap(mol: &Molecule) -> DMatrix<f64> {
+pub fn overlap(mol: &Molecule) -> Array2::<f64> {
     let nbasis = mol.atoms.len();
-    let mut s_mat = DMatrix::<f64>::zeros(nbasis, nbasis);
+    let mut s_mat = Array2::<f64>::zeros((nbasis, nbasis));
     let atoms = &mol.atoms;
     let coords = &mol.coords_list();
 

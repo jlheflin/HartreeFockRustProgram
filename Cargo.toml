@@ -7,3 +7,5 @@ edition = "2024"
 nalgebra = { version = "0.33.2", features = ["rand"] }
 clap = { version = "4", features = ["derive"] }
 rand = "0.9.1"
+GSL = "7.0.0"
+ndarray = "0.16.1"

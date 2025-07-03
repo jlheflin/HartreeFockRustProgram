@@ -1,6 +1,6 @@
-use nalgebra::{DMatrix, Matrix3, Vector3};
+use nalgebra::{Vector3};
 
-use crate::{classes::{molecule::Molecule, primitive_gaussian::PrimitiveGaussian}, energy::nuclear_nuclear_repulsion_energy::nuclear_nuclear_repusion_energy, integrals::{kinetic, overlap}};
+use crate::{classes::{molecule::Molecule, primitive_gaussian::PrimitiveGaussian}, energy::nuclear_nuclear_repulsion_energy::nuclear_nuclear_repusion_energy, integrals::{electron_electron_repulsion, electron_nuclear_attraction, kinetic, overlap}};
 // use clap::Parser;
 mod classes;
 mod energy;
@@ -49,9 +49,13 @@ fn main() {
     let e_nn = nuclear_nuclear_repusion_energy(&h_mol);
     let s_mat = overlap::overlap(&h_mol);
     let t_mat = kinetic::kinetic(&h_mol);
+    let v_ne = electron_nuclear_attraction::electron_nuclear_attraction(&h_mol);
+    let v_ee = electron_electron_repulsion::electron_electron_repulsion(&h_mol);
 
-    println!("Value of t_mat: \n{}", t_mat);
-
+    // println!("s_mat: \n{}", s_mat);
+    // println!("t_mat: \n{}", t_mat);
+    // println!("v_ne: \n{}", v_ne);
+    println!("v_ee: \n{}", v_ee);
     
     // let args = Args::parse();
 

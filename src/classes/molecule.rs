@@ -1,4 +1,4 @@
-use nalgebra::{coordinates, Vector3};
+use nalgebra::{Vector3};
 
 use crate::classes::atom::Atom;
 
