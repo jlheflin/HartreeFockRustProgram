@@ -20,7 +20,7 @@ pub fn scf_cycle(s_mat: &Array2<f64>, t_mat: &Array2<f64>, vne: &Array2<f64>, ve
 
     let s_inv_sqrt = eigvecs.dot(&lambda_inv_sqrt.dot(&eigvecs.t()));
 
-    for step in 0..max_iter {
+    for _step in 0..max_iter {
         let e_old = electronic_energy;
 
         let g = compute_g::compute_g(&dens_mat, vee);
@@ -38,13 +38,8 @@ pub fn scf_cycle(s_mat: &Array2<f64>, t_mat: &Array2<f64>, vne: &Array2<f64>, ve
         electronic_energy = compute_electronic_energy_expectation_value::compute_electronic_energy_expectation_value(&dens_mat, &t_mat, &vne, &g);
 
         if (electronic_energy - e_old).abs() < tol {
-            println!("SCF converged in {} iterations.", step);
             break;
         }
-
-
-
     }
-    
     return electronic_energy;
 }

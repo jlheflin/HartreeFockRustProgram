@@ -7,14 +7,6 @@ pub struct Molecule {
 }
 
 impl Molecule {
-    pub fn new() -> Self {
-        Molecule { atoms: Vec::new() }
-    }
-
-    pub fn add_atom(&mut self, atom: Atom) {
-        self.atoms.push(atom);
-    }
-
     pub fn z_list(&self) -> Vec<u8> {
         self.atoms.iter().map(|atom| atom.atomic_number).collect()
     }

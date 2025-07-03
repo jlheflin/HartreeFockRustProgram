@@ -41,8 +41,8 @@ fn main() {
         .collect();
 
 
-    let h1 = classes::atom::Atom::new(1, String::from("H"), h1_1s);
-    let h2 = classes::atom::Atom::new(1, String::from("H"), h2_1s);
+    let h1 = classes::atom::Atom::new(1, h1_1s);
+    let h2 = classes::atom::Atom::new(1, h2_1s);
 
     let mol = vec![h1, h2];
 
