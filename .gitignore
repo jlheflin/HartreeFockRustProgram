@@ -1,3 +1,4 @@
 target/
 .cargo/
 Hartree_Fock_Program.py
+result
