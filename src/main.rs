@@ -1,10 +1,12 @@
 use nalgebra::{Vector3};
 
-use crate::{classes::{molecule::Molecule, primitive_gaussian::PrimitiveGaussian}, energy::nuclear_nuclear_repulsion_energy::nuclear_nuclear_repusion_energy, integrals::{electron_electron_repulsion, electron_nuclear_attraction, kinetic, overlap}};
+use crate::{classes::{molecule::Molecule, primitive_gaussian::PrimitiveGaussian}, energy::nuclear_nuclear_repulsion_energy::nuclear_nuclear_repusion_energy, integrals::{electron_electron_repulsion, electron_nuclear_attraction, kinetic, overlap}, scf::scf_cycle};
 // use clap::Parser;
 mod classes;
 mod energy;
 mod integrals;
+mod density;
+mod scf;
 /// Simple program to greet someone
 // #[derive(Parser, Debug)]
 // #[command(author, version, about, long_about = None)]
@@ -51,11 +53,19 @@ fn main() {
     let t_mat = kinetic::kinetic(&h_mol);
     let v_ne = electron_nuclear_attraction::electron_nuclear_attraction(&h_mol);
     let v_ee = electron_electron_repulsion::electron_electron_repulsion(&h_mol);
+    let tol = 1e-5;
+    let max_iter = 30;
+
+    let egy = scf_cycle::scf_cycle(&s_mat, &t_mat, &v_ne, &v_ee, tol, max_iter, &h_mol);
+    let total_e = egy + e_nn;
+
+    println!("Total Energy: {}", total_e);
+    
 
     // println!("s_mat: \n{}", s_mat);
     // println!("t_mat: \n{}", t_mat);
     // println!("v_ne: \n{}", v_ne);
-    println!("v_ee: \n{}", v_ee);
+    // println!("v_ee: \n{}", v_ee);
     
     // let args = Args::parse();
 

@@ -1,1 +1,2 @@
 pub mod nuclear_nuclear_repulsion_energy;
+pub mod compute_electronic_energy_expectation_value;
