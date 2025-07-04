@@ -10,6 +10,7 @@ rand = "0.9.1"
 GSL = "7.0.0"
 ndarray = "0.16.1"
 ndarray-linalg = {version = "0.17.0", features = ["openblas-system"] }
+spdlog-rs = "0.4"
 
 [profile.release]
 debug = true

@@ -1,4 +1,5 @@
 use nalgebra::{Vector3};
+use spdlog::info;
 
 use crate::{classes::{molecule::Molecule, primitive_gaussian::PrimitiveGaussian}, energy::nuclear_nuclear_repulsion_energy::nuclear_nuclear_repusion_energy, integrals::{electron_electron_repulsion, electron_nuclear_attraction, kinetic, overlap}, scf::scf_cycle};
 // use clap::Parser;
@@ -32,6 +33,8 @@ fn main() {
         (0.1688554040E+00, 0.4446345422E+00),
     ];
 
+    info!("Using spdlog!");
+
     let h1_1s: Vec<PrimitiveGaussian> = sto_3.iter()
         .map(|(alpha, coeff)| PrimitiveGaussian::new(*alpha, *coeff, Vector3::new(0., 0., 0.)))
         .collect();
@@ -53,10 +56,12 @@ fn main() {
     let t_mat = kinetic::kinetic(&h_mol);
     let v_ne = electron_nuclear_attraction::electron_nuclear_attraction(&h_mol);
     let v_ee = electron_electron_repulsion::electron_electron_repulsion(&h_mol);
-    let tol = 1e-5;
+    let tol = 1e-32;
     let max_iter = 30;
+    let charge: i8 = 0;
+    let diis_enabled: bool = true;
 
-    let egy = scf_cycle::scf_cycle(&s_mat, &t_mat, &v_ne, &v_ee, tol, max_iter, &h_mol);
+    let egy = scf_cycle::scf_cycle(&s_mat, &t_mat, &v_ne, &v_ee, tol, max_iter, &h_mol, charge, diis_enabled);
     let total_e = egy + e_nn;
 
     println!("Total Energy: {}", total_e);
